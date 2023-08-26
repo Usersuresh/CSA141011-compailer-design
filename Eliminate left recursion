@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
+
+// Function to perform left factoring
+void leftFactor(char *production) {
+    int commonPrefixLength = 0;
+    int len = strlen(production);
+
+    // Find the length of the common prefix
+    while (commonPrefixLength < len - 1 && production[commonPrefixLength] == production[commonPrefixLength + 1]) {
+        commonPrefixLength++;
+    }
+
+    // If common prefix exists, perform left factoring
+    if (commonPrefixLength > 0) {
+        printf("Common Prefix Found: %.*s\n", commonPrefixLength + 1, production);
+
+        // Create new productions
+        printf("%.*s' -> %s\n", commonPrefixLength, production, production + commonPrefixLength + 1);
+        printf("%.*s'' -> %s\n", commonPrefixLength, production, "epsilon");
+    } else {
+        printf("No Common Prefix Found.\n");
+    }
+}
+
+int main() {
+    char production[100];
+
+    // Example production
+    printf("Enter a production: ");
+    scanf("%s", production);
+
+    leftFactor(production);
+
+    return 0;
+}
